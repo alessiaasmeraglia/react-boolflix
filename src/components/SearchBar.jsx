@@ -14,7 +14,7 @@ function SearchBar() {
             <input
                 type="text"
                 className="form-control"
-                placeholder="Cerca un film"
+                placeholder="Cerca un film o una serie"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
             />
