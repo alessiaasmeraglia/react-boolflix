@@ -5,35 +5,42 @@ import { getRating } from "../utils/rating";
 function Card({ item, type }) {
     const title = type === "movie" ? item.title : item.name;
     const originalTitle = type === "movie" ? item.original_title : item.original_name;
-    
+
     const language = getLanguage(item.original_language);
     const posterUrl = getPosterUrl(item.poster_path);
     const rating = getRating(item.vote_average);
 
     return (
-        <li className="list-group-item">
-            <img src={posterUrl} alt={title} className="img-fluid mb-3" />
-            <h3>{title}</h3>
+        <article className="movie-card">
+            <img src={posterUrl} alt={title} className="movie-card-poster" />
 
-            <p>
-                <strong>Titolo originale:</strong> {originalTitle}
-            </p>
+            <div className="movie-card-info">
+                <h3 className="movie-card-title">{title}</h3>
 
-            <p>
-                <strong>Lingua:</strong> {language.flag} {language.name}
-            </p>
+                <p>
+                    <strong>Titolo originale:</strong> {originalTitle}
+                </p>
 
-            <p>
-                <strong>Voto:</strong>{" "}
-                {[1, 2, 3, 4, 5].map((star) => {
-                    return (
-                        <span key={star}>
-                            {star <= rating ? "★" : "☆"}
-                        </span>
-                    );
-                })}
-            </p>
-        </li>
+                <p>
+                    <strong>Lingua:</strong> {language.flag} {language.name}
+                </p>
+
+                <p>
+                    <strong>Voto:</strong>{" "}
+                    {[1, 2, 3, 4, 5].map((star) => {
+                        return (
+                            <span key={star}>
+                                {star <= rating ? "★" : "☆"}
+                            </span>
+                        );
+                    })}
+                </p>
+                <p className="movie-card-overview">
+                    <strong>Overview:</strong>{" "}
+                    {item.overview || "Overview non disponibile."}
+                </p>
+            </div>
+        </article>
     );
 }
 
