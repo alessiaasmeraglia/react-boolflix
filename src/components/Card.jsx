@@ -24,7 +24,14 @@ function Card({ item, type }) {
             </p>
 
             <p>
-                <strong>Voto:</strong> {rating}
+                <strong>Voto:</strong>{" "}
+                {[1, 2, 3, 4, 5].map((star) => {
+                    return (
+                        <span key={star}>
+                            {star <= rating ? "★" : "☆"}
+                        </span>
+                    );
+                })}
             </p>
         </li>
     );
