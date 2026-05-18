@@ -6,6 +6,7 @@ const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 function GlobalProvider({ children }) {
     const [search, setSearch] = useState("");
     const [movies, setMovies] = useState([]);
+    const [series, setSeries] = useState([]);
 
     function searchMovies() {
         fetch(
@@ -18,11 +19,28 @@ function GlobalProvider({ children }) {
             });
     }
 
+    function searchSeries() {
+        fetch(
+            `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=it-IT&query=${search}`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("RISULTATI SERIE:", data.results);
+                setSeries(data.results);
+            });
+    }
+
+    function searchAll() {
+        searchMovies();
+        searchSeries();
+    }
+
     const value = {
         search,
         setSearch,
         movies,
-        searchMovies,
+        series,
+        searchAll,
     };
 
     return (
