@@ -36,6 +36,18 @@ function GlobalProvider({ children }) {
             .filter((genreName) => genreName !== null);
     }
 
+    function getCredits(itemId, type) {
+        const endpoint = type === "movie" ? "movie" : "tv";
+
+        return fetch(
+            `https://api.themoviedb.org/3/${endpoint}/${itemId}/credits?api_key=${apiKey}&language=it-IT`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                return data.cast.slice(0, 5).map((actor) => actor.name);
+            });
+    }
+
     function searchAll() {
         if (search.trim() === "") {
             return;
