@@ -18,7 +18,7 @@ function Card({ item, type }) {
             </p>
 
             <p>
-                <strong>Voto:</strong> {movie.vote_average}
+                <strong>Voto:</strong> {item.vote_average}
             </p>
         </li>
     );
