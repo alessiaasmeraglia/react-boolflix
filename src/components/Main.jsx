@@ -15,7 +15,7 @@ function Main() {
                 </p>
             )}
 
-            {isLoading && <P>Caricamento...</P>}
+            {isLoading && <p>Caricamento...</p>}
 
             {hasSearched && !isLoading && !hasResults &&(
                 <p className="text-secondary">Nessun risultato trovato.</p>
