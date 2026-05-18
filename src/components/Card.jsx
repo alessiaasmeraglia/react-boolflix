@@ -1,6 +1,9 @@
+import { getLanguage } from "../utils/flags";
+
 function Card({ item, type }) {
     const title = type === "movie" ? item.title : item.name;
     const originalTitle = type === "movie" ? item.original_title : item.original_name;
+    const language = getLanguage(item.original_language);
 
     return (
         <li className="list-group-item">
@@ -11,11 +14,11 @@ function Card({ item, type }) {
             </p>
 
             <p>
-                <strong>Lingua:</strong> {item.original_language}
+                <strong>Lingua:</strong> {language.flag} {language.name}
             </p>
 
             <p>
-                <strong>Voto:</strong> {item.vote_average}
+                <strong>Voto:</strong> {movie.vote_average}
             </p>
         </li>
     );
