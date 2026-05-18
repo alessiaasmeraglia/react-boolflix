@@ -1,6 +1,9 @@
 import Card from "./Card";
 
 function ResultSection({ title, items, type }) {
+    if (items.length === 0){
+        return null;
+    }
         
     return (
         <section className="mb-5">
