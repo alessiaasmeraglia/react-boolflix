@@ -1,18 +1,21 @@
-function Card({ movie }) {
+function Card({ item, type }) {
+    const title = type === "movie" ? item.title : item.name;
+    const originalTitle = type === "movie" ? item.original_title : item.original_name;
+
     return (
         <li className="list-group-item">
-            <h3>{movie.title}</h3>
+            <h3>{title}</h3>
 
             <p>
-                <strong>Titolo originale:</strong> {movie.original_title}
+                <strong>Titolo originale:</strong> {originalTitle}
             </p>
 
             <p>
-                <strong>Lingua:</strong> {movie.original_language}
+                <strong>Lingua:</strong> {item.original_language}
             </p>
 
             <p>
-                <strong>Voto:</strong> {movie.vote_average}
+                <strong>Voto:</strong> {item.vote_average}
             </p>
         </li>
     );

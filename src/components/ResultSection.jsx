@@ -1,9 +1,7 @@
-import { useContext } from "react";
-import GlobalContext from "../contexts/GlobalContext";
 import Card from "./Card";
 
 
-function ResultSection( title, items, type ) {
+function ResultSection({ title, items, type }) {
         
     return (
         <section className="mb-4">
@@ -11,7 +9,7 @@ function ResultSection( title, items, type ) {
 
             <ul className="list-group">
                 {items.map((item) => {
-                    return <Card key={item.id} movie={item} />;
+                    return <Card key={item.id} item={item} type={type} />;
                 })}
             </ul>
         </section>
