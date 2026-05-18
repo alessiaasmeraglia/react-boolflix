@@ -19,7 +19,11 @@ function SearchBar() {
                 onChange={(event) => setSearch(event.target.value)}
             />
 
-            <button type="submit" className="btn btn-danger">
+            <button 
+                type="submit" 
+                className="btn btn-danger"
+                disabled={search.trim() === ""}
+            >
                 Cerca
             </button>
         </form>
