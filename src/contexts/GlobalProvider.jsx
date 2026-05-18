@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import GlobalContext from "./GlobalContext";
 
 const apiKey = import.meta.env.VITE_TMDB_API_KEY;
@@ -7,6 +7,8 @@ function GlobalProvider({ children }) {
     const [search, setSearch] = useState("");
     const [movies, setMovies] = useState([]);
     const [series, setSeries] = useState([]);
+    const [movieGenres, setMovieGenres] = useState([]);
+    const [seriesGenres, setSeriesGenres] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
 
