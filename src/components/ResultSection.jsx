@@ -10,7 +10,7 @@ function ResultSection({ title, items, type }) {
                 {items.map((item) => {
                     return (
                         <div key={item.id} className="col-6 col-md-4 col-lg-3 col-xl-2"> 
-                            <Card item={item} type={type} />;
+                            <Card item={item} type={type} />
                         </div>
                     );
                 })}
