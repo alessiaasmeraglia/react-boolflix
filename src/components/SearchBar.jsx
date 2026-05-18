@@ -1,0 +1,29 @@
+import { useContext } from "react";
+import GlobalContext from "../contexts/GlobalContext";
+
+function SearchBar() {
+    const { search, setSearch, searchMovies } = useContext(GlobalContext);
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        searchMovies();
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="d-flex gap-2">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="Cerca un film"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+            />
+
+            <button type="submit" className="btn btn-danger">
+                Cerca
+            </button>
+        </form>
+    );
+}
+
+export default SearchBar;
