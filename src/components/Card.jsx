@@ -24,7 +24,7 @@ function Card({ item, type }) {
             </p>
 
             <p>
-                <strong>Voto:</strong> {item.vote_average}
+                <strong>Voto:</strong> {rating}
             </p>
         </li>
     );
