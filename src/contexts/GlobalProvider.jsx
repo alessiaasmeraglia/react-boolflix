@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import GlobalContext from "./GlobalContext";
 
 const apiKey = import.meta.env.VITE_TMDB_API_KEY;
@@ -11,6 +11,21 @@ function GlobalProvider({ children }) {
     const [seriesGenres, setSeriesGenres] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
+
+    useEffect(() => {
+        Promise.all([
+            fetch(
+                `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=it-IT&query=${search}`
+            ).then((response) => response.json()),
+
+            fetch(
+                `https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&language=it-IT`
+            ).then((response) => response.json()),
+        ]).then(([movieGenresData, seriesGenresData]) => {
+            setMovieGenres(movieGenresData.genres);
+            setSeriesGenres(seriesGenresData.genres);
+        });
+    }, []);
 
     function searchAll() {
         if (search.trim() === "") {
