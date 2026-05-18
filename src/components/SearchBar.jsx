@@ -2,11 +2,11 @@ import { useContext } from "react";
 import GlobalContext from "../contexts/GlobalContext";
 
 function SearchBar() {
-    const { search, setSearch, searchMovies } = useContext(GlobalContext);
+    const { search, setSearch, searchAll } = useContext(GlobalContext);
 
     function handleSubmit(event) {
         event.preventDefault();
-        searchMovies();
+        searchAll();
     }
 
     return (
