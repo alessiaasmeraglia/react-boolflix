@@ -7,32 +7,33 @@ function GlobalProvider({ children }) {
     const [search, setSearch] = useState("");
     const [movies, setMovies] = useState([]);
     const [series, setSeries] = useState([]);
-
-    function searchMovies() {
-        fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=it-IT&query=${search}`
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data.results);
-                setMovies(data.results);
-            });
-    }
-
-    function searchSeries() {
-        fetch(
-            `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=it-IT&query=${search}`
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("RISULTATI SERIE:", data.results);
-                setSeries(data.results);
-            });
-    }
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasSearched, setHasSearched] = useState(false);
 
     function searchAll() {
-        searchMovies();
-        searchSeries();
+        if (search.trim() === "") {
+            return;
+        }
+
+        setIsLoading(true);
+        setHasSearched(true);
+
+        Promise.all([
+            fetch(
+                `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=it-IT&query=${search}`
+            ).then((response) => response.json()),
+
+            fetch(
+                `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&language=it-IT&query=${search}`
+            ).then((response) => response.json()),
+        ])
+            .then(([moviesData, seriesData]) => {
+                setMovies(moviesData.results);
+                setSeries(seriesData.results);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const value = {
@@ -40,6 +41,8 @@ function GlobalProvider({ children }) {
         setSearch,
         movies,
         series,
+        isLoading,
+        hasSearched,
         searchAll,
     };
 
