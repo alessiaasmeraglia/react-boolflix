@@ -27,6 +27,15 @@ function GlobalProvider({ children }) {
         });
     }, []);
 
+    function getGenreNames(genreIds, genresList) {
+        return genreIds
+            .map((genreId) => {
+                const genre = genresList.find((genre) => genre.id === genreId);
+                return genre ? genre.name : null;
+            })
+            .filter((genreName) => genreName !== null);
+    }
+
     function searchAll() {
         if (search.trim() === "") {
             return;
