@@ -23,12 +23,6 @@ function Home() {
 
     return (
         <>
-            {!hasSearched && (
-                <p className="text-secondary">
-                    Cerca un film o una serie TV per iniziare.
-                </p>
-            )}
-
             {isLoading && <p>Caricamento...</p>}
 
             {hasSearched && !isLoading && !hasResults && (

@@ -15,10 +15,6 @@ function SeriesPage() {
 
     return (
         <>
-            {!hasSearched && (
-                <p className="text-secondary">Cerca una serie TV per iniziare.</p>
-            )}
-
             {isLoading && <p>Caricamento...</p>}
 
             {hasSearched && !isLoading && filteredSeries.length === 0 && (

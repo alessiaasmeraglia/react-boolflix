@@ -15,10 +15,6 @@ function MoviesPage() {
 
     return (
         <>
-            {!hasSearched && (
-                <p className="text-secondary">Cerca un film per iniziare.</p>
-            )}
-
             {isLoading && <p>Caricamento...</p>}
 
             {hasSearched && !isLoading && filteredMovies.length === 0 && (
