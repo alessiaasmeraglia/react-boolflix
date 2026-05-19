@@ -37,8 +37,8 @@ function Main() {
 
             {!isLoading && (
                 <>
-                    <ResultSection title="Film" items={movies} type="movie" />
-                    <ResultSection title="Serie TV" items={series} type="series" />
+                    <ResultSection title="Film" items={filteredMovies} type="movie" />
+                    <ResultSection title="Serie TV" items={filteredSeries} type="series" />
                 </>
             )}
         </main>
