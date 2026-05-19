@@ -25,6 +25,8 @@ function GlobalProvider({ children }) {
         ]).then(([movieGenresData, seriesGenresData]) => {
             setMovieGenres(movieGenresData.genres);
             setSeriesGenres(seriesGenresData.genres);
+
+            loadInitialContent(movieGenresData.genres, seriesGenresData.genres);
         });
     }, []);
 
@@ -46,6 +48,53 @@ function GlobalProvider({ children }) {
             .then((response) => response.json())
             .then((data) => {
                 return data.cast.slice(0, 5).map((actor) => actor.name);
+            });
+    }
+
+    function loadInitialContent(movieGenresList, seriesGenresList) {
+        setIsLoading(true);
+
+        Promise.all([
+            fetch(
+                `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=it-IT`
+            ).then((response) => response.json()),
+
+            fetch(
+                `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=it-IT`
+            ).then((response) => response.json()),
+        ])
+            .then(([moviesData, seriesData]) => {
+                const moviesWithDetailsPromises = moviesData.results.map((movie) => {
+                    return getCredits(movie.id, "movie").then((cast) => {
+                        return {
+                            ...movie,
+                            cast,
+                            genres: getGenreNames(movie.genre_ids, movieGenresList),
+                        };
+                    });
+                });
+
+                const seriesWithDetailsPromises = seriesData.results.map((serie) => {
+                    return getCredits(serie.id, "series").then((cast) => {
+                        return {
+                            ...serie,
+                            cast,
+                            genres: getGenreNames(serie.genre_ids, seriesGenresList),
+                        };
+                    });
+                });
+
+                return Promise.all([
+                    Promise.all(moviesWithDetailsPromises),
+                    Promise.all(seriesWithDetailsPromises),
+                ]);
+            })
+            .then(([moviesWithDetails, seriesWithDetails]) => {
+                setMovies(moviesWithDetails);
+                setSeries(seriesWithDetails);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     }
 
