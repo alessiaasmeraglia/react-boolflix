@@ -35,6 +35,21 @@ function Card({ item, type }) {
                         );
                     })}
                 </p>
+
+                <p>
+                    <strong>Cast:</strong>{" "}
+                    {item.cast && item.cast.length > 0
+                        ? item.cast.join(", ")
+                        : "Cast non disponibile"}
+                </p>
+
+                <p>
+                    <strong>Generi:</strong>{" "}
+                    {item.genres && item.genres.length > 0
+                        ? item.genres.join(", ")
+                        : "Generi non disponibili"}
+                </p>
+
                 <p className="movie-card-overview">
                     <strong>Overview:</strong>{" "}
                     {item.overview || "Overview non disponibile."}

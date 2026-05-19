@@ -15,7 +15,7 @@ function GlobalProvider({ children }) {
     useEffect(() => {
         Promise.all([
             fetch(
-                `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=it-IT&query=${search}`
+                `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=it-IT`
             ).then((response) => response.json()),
 
             fetch(
