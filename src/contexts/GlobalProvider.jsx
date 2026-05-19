@@ -66,8 +66,34 @@ function GlobalProvider({ children }) {
             ).then((response) => response.json()),
         ])
             .then(([moviesData, seriesData]) => {
-                setMovies(moviesData.results);
-                setSeries(seriesData.results);
+                const moviesWithDetailsPromises = moviesData.results.map((movie) => {
+                    return getCredits(movie.id, "movie").then((cast) => {
+                        return {
+                            ...movie,
+                            cast,
+                            genres: getGenreNames(movie.genre_ids, movieGenres),
+                        };
+                    });
+
+                });
+
+                const seriesWithDetailsPromises = seriesData.results.map((serie) => {
+                    return getCredits(serie.id, "series").then((cast) => {
+                        return {
+                            ...serie,
+                            cast,
+                            genres: getGenreNames(serie.genre_ids, seriesGenres),
+                        };
+                    });
+                });
+                return Promise.all([
+                    Promise.all(moviesWithDetailsPromises),
+                    Promise.all(seriesWithDetailsPromises),
+                ]);
+            })
+            .then(([moviesWithDetails, seriesWithDetails]) => {
+                setMovies(moviesWithDetails);
+                setSeries(seriesWithDetails);
             })
             .finally(() => {
                 setIsLoading(false);
