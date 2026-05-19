@@ -56,6 +56,7 @@ function GlobalProvider({ children }) {
 
         setIsLoading(true);
         setHasSearched(true);
+        setSelectedGenre("");
 
         Promise.all([
             fetch(

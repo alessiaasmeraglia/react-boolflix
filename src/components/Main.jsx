@@ -3,7 +3,21 @@ import GlobalContext from "../contexts/GlobalContext";
 import ResultSection from "./ResultSection";
 
 function Main() {
-    const { movies, series, isLoading, hasSearched } = useContext(GlobalContext);
+    const { movies, series, isLoading, hasSearched, selectedGenre } = useContext(GlobalContext);
+
+    const filteredMovies =
+        selectedGenre === ""
+            ? movies
+            : movies.filter((movie) => {
+                return movie.genre_ids.includes(Number(selectedGenre));
+            });
+
+    const filteredSeries =
+        selectedGenre === ""
+            ? series
+            : series.filter((serie) => {
+                return serie.genre_ids.includes(Number(selectedGenre));
+            });
 
     const hasResults = movies.length > 0 || series.length > 0;
 
@@ -11,13 +25,13 @@ function Main() {
         <main className="container py-4">
             {!hasSearched && (
                 <p className="text-secondary">
-                    Cerca un fil o una serie TV per iniziare.
+                    Cerca un film o una serie TV per iniziare.
                 </p>
             )}
 
             {isLoading && <p>Caricamento...</p>}
 
-            {hasSearched && !isLoading && !hasResults &&(
+            {hasSearched && !isLoading && !hasResults && (
                 <p className="text-secondary">Nessun risultato trovato.</p>
             )}
 
