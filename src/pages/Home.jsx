@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import GlobalContext from "../contexts/GlobalContext";
-import ResultSection from "./ResultSection";
+import ResultSection from "../components/ResultSection";
 
 function Home() {
     const { movies, series, isLoading, hasSearched, selectedGenre } = useContext(GlobalContext);
