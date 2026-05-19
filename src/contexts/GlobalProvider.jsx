@@ -9,6 +9,7 @@ function GlobalProvider({ children }) {
     const [series, setSeries] = useState([]);
     const [movieGenres, setMovieGenres] = useState([]);
     const [seriesGenres, setSeriesGenres] = useState([]);
+    const [selectedGenre, setSelectedGenre] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
 
@@ -105,6 +106,10 @@ function GlobalProvider({ children }) {
         setSearch,
         movies,
         series,
+        movieGenres,
+        seriesGenres,
+        selectedGenre,
+        setSelectedGenre,
         isLoading,
         hasSearched,
         searchAll,
