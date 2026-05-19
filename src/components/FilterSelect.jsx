@@ -13,7 +13,7 @@ function FilterSelect() {
 
     return (
         <select
-            className="form-select"
+            className="form-select filter-select"
             value={selectedGenre}
             onChange={(event) => setSelectedGenre(event.target.value)}
         >

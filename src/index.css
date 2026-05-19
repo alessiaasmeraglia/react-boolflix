@@ -1,7 +1,66 @@
+/* =========================
+   GENERAL
+========================= */
+
 body {
     background-color: #141414;
     color: white;
 }
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-shrink: 0;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    white-space: nowrap;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    max-width: 620px;
+}
+
+.filter-select {
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.search-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.search-bar input {
+    flex: 1;
+    min-width: 280px;
+}
+
+
+/* =========================
+   MOVIE CARD
+========================= */
 
 .movie-card {
     position: relative;
@@ -48,4 +107,53 @@ body {
 .movie-card-overview {
     font-size: 0.8rem;
     line-height: 1.4;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+    .header-container {
+        flex-wrap: wrap;
+    }
+
+    .header-actions {
+        width: 100%;
+        max-width: none;
+    }
+
+    .search-bar input {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-left {
+        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .header-nav {
+        gap: 1rem;
+    }
+
+    .header-actions {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .filter-select {
+        width: 130px;
+    }
+
+    .search-bar {
+        min-width: 0;
+    }
+
+    .search-bar input {
+        min-width: 0;
+    }
 }

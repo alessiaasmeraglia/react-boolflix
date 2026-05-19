@@ -10,7 +10,7 @@ function SearchBar() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="d-flex gap-2">
+        <form onSubmit={handleSubmit} className="d-flex gap-2 search-bar">
             <input
                 type="text"
                 className="form-control"

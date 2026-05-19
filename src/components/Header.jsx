@@ -5,11 +5,11 @@ import FilterSelect from "./FilterSelect";
 function Header() {
     return (
         <header className="bg-black py-3 sticky-top">
-            <div className="container d-flex justify-content-between align-items-center gap-3">
-                <div className="d-flex align-items-center gap-4">
+            <div className="container header-container">
+                <div className="header-left">
                     <h1 className="text-danger m-0">BoolFlix</h1>
 
-                    <nav>
+                    <nav className="header-nav">
                         <NavLink to="/" className="nav-link text-white">
                             Home
                         </NavLink>
@@ -24,7 +24,7 @@ function Header() {
                     </nav>    
                 </div>
 
-                <div  className="d-flex gap-2">
+                <div  className="header-actions">
                     <FilterSelect />
                     <SearchBar />
                 </div>
